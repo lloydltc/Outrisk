@@ -16,7 +16,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'authapi'] , function () use ($router) {
     $router->post('register', 'AuthController@register');
     $router->post('login', 'AuthController@login');
 });
@@ -33,4 +33,11 @@ $router->group(["prefix" => "user-role"], function () use ($router) {
     $router->post("/give-role", "UserRoleController@userAssignRole");
     $router->post("/revoke-role", "UserRoleController@userRemoveRoleAs");
 
+});
+
+$router->group(["prefix" => "auth"], function () use ($router) {
+    $router->post("logout", "AuthController@logout");
+    $router->post("password-change", "AuthPasswordChangeController");
+    $router->get("refresh", "AuthController@refresh");
+    $router->get("me", "AuthController@me");
 });

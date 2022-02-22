@@ -87,6 +87,7 @@ $app->routeMiddleware([
     'auth'       => App\Http\Middleware\Authenticate::class,
     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
     'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'authapi' => App\Http\Middleware\AuthMiddleware::class,
 ]);
 
 /*
